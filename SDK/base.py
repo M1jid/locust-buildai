@@ -74,3 +74,19 @@ class BaseHTTPSDK(object):
             proxies=proxies
         )
         return response
+    def get(
+        self,
+        url,
+        headers: dict = None,
+        timeout: int = None,
+        return_response: bool = False,
+                ):
+    response = self.request(
+        'POST',
+        url,
+        headers=headers,
+        timeout=timeout,
+        return_response=return_response,
+
+    )
+    return response

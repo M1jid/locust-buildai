@@ -4,14 +4,14 @@ from . import settings
 
 
 class DifyRequestHandler(BaseHTTPSDK):
-    PASSPORT_URL = settings.PASSPORT_API_URL + "passport"
-    CHAT_MESSAGES_URL = settings.CHAT_MESSAGES_API_URL + "chat-messages"
+    PASSPORT_URL = settings.BASE_API_URL + "passport"
+    CHAT_MESSAGES_URL = settings.BASE_API_URL + "chat-messages"
 
     def __init__(self):
         pass
 
     def get_token(self, app_code):
-        response = self.post(self.PASSPORT_URL, headers={"X-App-Code": app_code})
+        response = self.get(self.PASSPORT_URL, headers={"X-App-Code": app_code}, return_response=true)
         return response
 
     def create_message(self, message, token):
@@ -19,7 +19,7 @@ class DifyRequestHandler(BaseHTTPSDK):
             message: message
         }
         headers = {
-            "Authorization": f"barear {token}"
+            "Authorization": f"Bearer {token}"
         }
         response = self.post(
             self.CHAT_MESSAGES_URL,
