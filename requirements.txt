@@ -1,6 +1,4 @@
 python == 3.11.5
-beautifulsoup4 == 4.12.2
 requests == 2.31.0
-trafilatura == 1.7.0
 
 
