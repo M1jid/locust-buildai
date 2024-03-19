@@ -81,12 +81,12 @@ class BaseHTTPSDK(object):
         timeout: int = None,
         return_response: bool = False,
                 ):
-    response = self.request(
-        'POST',
+        response = self.request(
+        'GET',
         url,
         headers=headers,
         timeout=timeout,
         return_response=return_response,
 
     )
-    return response
+        return response
