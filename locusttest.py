@@ -1,7 +1,7 @@
 from locust import HttpUser, task, between
 import configparser
 import logging
-from settings import returns
+from . import settings
 import random
 
 
@@ -19,7 +19,8 @@ class CommandLineUser(HttpUser):
         super().__init__(*args, **kwargs)
         Config.load()  # Load config attributes
         self.wait_time = between(5, 15)  # Random wait time between requests
-        self.BASE_API_URL, self.HASH_CODES = returns()
+        self.BASE_API_URL: str = settings.BASE_API_URL
+        self.HASH_CODES: str = settings.HASH_CODES
 
         try:
             self.random_number = random.randint(1, Config.messages)
@@ -39,9 +40,9 @@ class CommandLineUser(HttpUser):
         else:
             app_code = self.HASH_CODES  # Replace with your actual app code
             headers = {'X-App-Code': app_code}
-
             response = self.client.get(f'{self.BASE_API_URL}passport', headers=headers)
             response.raise_for_status()
+            logging.log(f"Attempt to get access token with status code: {str(response.status_code)}")
             self.user.access_token = response.json().get('access_token')
 
     @task
@@ -49,8 +50,9 @@ class CommandLineUser(HttpUser):
         try:
             headers = {'Authorization': f'Bearer {self.user.access_token}'}
             payload = {'user_id': self.user.username, 'message': 'Hello, chatbot!'}
-            response = self.client.post('/chat', headers=headers, json=payload)
+            response = self.client.post('/chat-messages', headers=headers, json=payload)
             response.raise_for_status()
+            logging.log(f"Attempt to create message with status code: {str(response.status_code)}")
         except Exception as e:
             logging.error(f"Error during message creation: {str(e)}")
 

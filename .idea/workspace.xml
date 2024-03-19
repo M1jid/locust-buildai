@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ef98b50-a974-479e-8924-879d2ff40b99" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/dify_request_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/dify_request_handler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locusttest.py" beforeDir="false" afterPath="$PROJECT_DIR$/locusttest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/untitled0.py" beforeDir="false" afterPath="$PROJECT_DIR$/untitled0.py" afterDir="false" />
-    </list>
+    <list default="true" id="4ef98b50-a974-479e-8924-879d2ff40b99" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -109,7 +106,7 @@
       <workItem from="1710760379703" duration="600000" />
       <workItem from="1710760981783" duration="276000" />
       <workItem from="1710761292616" duration="679000" />
-      <workItem from="1710870344806" duration="304000" />
+      <workItem from="1710870344806" duration="656000" />
     </task>
     <servers />
   </component>
