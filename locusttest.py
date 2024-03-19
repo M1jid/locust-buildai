@@ -4,6 +4,7 @@ import logging
 from settings import returns
 import random
 
+
 class Config:
     @classmethod
     def load(cls):
@@ -12,18 +13,19 @@ class Config:
         cls.chats = int(config['chats']['count'])
         cls.messages = int(config['messages']['count'])
 
+
 class CommandLineUser(HttpUser):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         Config.load()  # Load config attributes
         self.wait_time = between(5, 15)  # Random wait time between requests
         self.BASE_API_URL, self.HASH_CODES = returns()
-        
+
         try:
             self.random_number = random.randint(1, Config.messages)
         except ValueError:
             print("Error: Input number should be greater than zero!")
-            
+
     def on_start(self):
         try:
             self.get_bearer_token()

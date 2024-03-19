@@ -11,7 +11,7 @@ class DifyRequestHandler(BaseHTTPSDK):
         pass
 
     def get_token(self, app_code):
-        response = self.get(self.PASSPORT_URL, headers={"X-App-Code": app_code}, return_response=true)
+        response = self.get(self.PASSPORT_URL, headers={"X-App-Code": app_code}, return_response=True)
         return response
 
     def create_message(self, message, token):
