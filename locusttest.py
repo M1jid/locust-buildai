@@ -1,4 +1,5 @@
 import configparser
+import sys
 import logging
 import settings
 import random
@@ -16,8 +17,10 @@ class Config:
 
 class CommandLineUser(HttpUser):
     wait_time = between(5, 15)
-    BASE_API_URL = settings.BASE_API_URL
-    HASH_CODES = settings.HASH_CODES
+    # BASE_API_URL = settings.BASE_API_URL
+    BASE_API_URL = "https://baas-dev.buildai.company/api/"
+    #HASH_CODES = settings.HASH_CODES 
+    HASH_CODES = "n8HgfIAGLskbEfZr1"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -28,8 +31,10 @@ class CommandLineUser(HttpUser):
     def on_start(self):
         try:
             if not self.access_token:
-                self.get_bearer_token()
-            self.create_message()
+                self.access_token = self.get_bearer_token()
+                if not self.access_token:
+                    sys.exit(1)
+            # self.create_message()
         except Exception as e:
             logging.error(f"Error during task execution: {str(e)}")
 
@@ -40,9 +45,12 @@ class CommandLineUser(HttpUser):
             app_code = self.HASH_CODES
             headers = {'X-App-Code': app_code}
             response = self.client.get(f'{self.BASE_API_URL}passport', headers=headers)
-            response.raise_for_status()
-            self.access_token = response.json().get('access_token')
+            logging.info(response)
+            
+            # response.raise_for_status()
             logging.info(f"Access token retrieved with status code: {response.status_code}")
+            return response.json().get('access_token')
+            
 
     @task
     def create_message(self):
